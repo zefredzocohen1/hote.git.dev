@@ -163,20 +163,20 @@
                         if(!isset($user_id)||$user_id==''){
                             redirect(base_url());
                         }
-                        if($id=''){
+                        if($id==''){
                             redirect(base_url());
                         }
-                        $id_decode = $this->config->item('encode_id');
+                        $id_decode = $this->config->item('encode_id')->decode($id);
                         if(count($id_decode)<=0){
                             redirect(base_url());
                         }else{
-                            $id_encode = $id;
+                            $data['id_encode'] = $id;
                         }
                         $checkin = $this->input->get('checkin')?$this->input->get('checkin'):'';
                         $checkout = $this->input->get('checkout')?$this->input->get('checkout'):'';
                         $guests = $this->input->get('guests')?$this->input->get('guests'):'';
                         if($checkin==''||$checkout==''||$guests==''){
-                            redirect(base_url().'room/room_detail/'.$id_encode);
+                            redirect(base_url().'room/room_detail/'.$data['id_encode']);
                         }
                         $input = array(
                             'where'=>array(
@@ -198,10 +198,10 @@
                                 date('d',  strtotime(str_replace('/', '-', $checkout)))
                             );
                         if($data['checkin']>$data['checkout']){
-                            redirect(base_url().'room/room_detail/'.$id_encode);
+                            redirect(base_url().'room/room_detail/'.$data['id_encode']);
                         }
                         if($data['checkin']<  $dateNow||$data['checkout']<$dateNow){
-                            redirect(base_url().'room/room_detail/'.$id_encode);
+                            redirect(base_url().'room/room_detail/'.$data['id_encode']);
                         }
                         $prices = $this->post_room_model->get_row($input);
                         $data['name_room'] = $prices->post_room_name;
@@ -213,7 +213,7 @@
                         //phí dọn dẹp
                         $data['clearning_fee_vn'] = $prices->clearning_fee_vn;
                         $data['sub_day'] = $data['checkout']->diff($data['checkin']);
-                        $data['distance_day'] = $sub_day->days+1;
+                        $data['distance_day'] = $data['sub_day']->days+1;
                         $data['price_all_night'] = $data['distance_day']*$data['price_night_vn'];
                         if($guests<=$data['max_guest']){
                             $data['guest_change'] = 0;
@@ -221,12 +221,19 @@
                         else{
                             $data['guest_change'] = $guests-$data['max_guest'];
                         }
-                        if($guest_change<=0){
+                        if($data['guest_change']<=0){
                             $data['price_all_night_add_fee'] = $data['price_all_night']+$data['clearning_fee_vn'];
                         }else{
                             $data['price_all_night_add_fee'] = $data['price_all_night']+$data['clearning_fee_vn']+($data['guest_change'])*$data['price_guest_more_vn'];
                         }
-                        
+                        $input = array();
+                        $input = array(
+                            'where'=>array(
+                                    'user_id'=>$user_id,
+                                )
+                            );
+                        $data['user'] = $this->user_model->get_row($input);
+//                        pre($data['user']);return;
                         $data['meta_title'] = 'order room';
                         $data['temp'] = ('site/room/order');
                         $this->load->view('site/layout_index', isset($data) ? ($data) : null);

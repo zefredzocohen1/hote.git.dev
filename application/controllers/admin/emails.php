@@ -75,7 +75,7 @@
                     'email_type' => $this->input->post('type_email')?trim($this->input->post('type_email')):'',
                 );
                 if($this->email_model->update($id,$data))
-                    echo json_encode (array('success'=>true,'message'=>'success_email_update'));
+                    echo json_encode (array('success'=>true,'message'=>$data['description']));
                 else {
                     echo json_encode (array('success'=>FALSE,'message'=>'error_email_update'));
                 }
