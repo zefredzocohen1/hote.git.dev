@@ -21,9 +21,10 @@ class MY_Model extends CI_Model {
      */
     function create($data = array())
     {
-        if($this->db->insert($this->table, $data))
+        $id = $this->db->insert_id($this->table, $data);
+        if($id>0)
         {
-            return TRUE;
+            return $id;
         }else{
             return FALSE;
         }
@@ -205,12 +206,17 @@ class MY_Model extends CI_Model {
      * Lay danh sach
      * $input : mang cac du lieu dau vao
      */
-    function get_list($input = array())
+    function get_list($input = array(),$join = array())
     {
 
         //xu ly ca du lieu dau vao
         $this->get_list_set_input($input);
-
+        if(count($join)>0){
+            foreach ($join as $key => $value){
+                $tmp = explode('::', $value);
+                if(count($tmp)==2)$this->db->join($key, $key.'.'.$tmp[0].'='.  $this->table.'.'.$tmp[1]);
+            }
+        }
         //thuc hien truy van du lieu
         $query = $this->db->get($this->table);
 

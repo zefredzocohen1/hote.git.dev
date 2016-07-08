@@ -163,7 +163,13 @@ class User extends MY_Controller
         $nameCustomer = $this->input->post('nameCustomer')?trim($this->input->post('nameCustomer')):'';
         $phoneNumber = $this->input->post('phoneNumber')?trim($this->input->post('phoneNumber')):'';
         $email = $this->input->post('email')?trim($this->input->post('email')):'';
-        
+        if($email==''||$phoneNumber==''){
+            $data['error'] = 'Lỗi tạo tài khoản';
+            echo json_encode($data);
+            exit;
+        }
+        $data['email'] = $email;
+        $data['phone'] = $phoneNumber;
         $this->load->model("role_model");
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -176,14 +182,18 @@ class User extends MY_Controller
         if(count($_POST)>0){
                 $role_id    = $role_id;
                 $data = array(
+                    'last_name'=>$nameCustomer,
                     'email' => $email,
+                    'phone'=>$phoneNumber,
                     'role_id' => $role_id,  
                 );
                 if($this->user_model->check_exists($data)){
                     echo json_encode(array(
-                        'sucssec'=>true,
+                        'success'=>true,
                         'action'=>'Ton tai',
                     ));
+                    $this->session->set_userdata($data);
+                    exit();
                 }else{
                     $data['last_name'] = $nameCustomer;
                     $data['first_name'] = '1';
@@ -194,7 +204,7 @@ class User extends MY_Controller
                         $index++;
                         if($index>50){
                             echo json_encode(array(
-                                'sucssec'=>FALSE,
+                                'success'=>FALSE,
                                 'action'=>'Qua nhieu lan reload',
                             ));
                             break;
@@ -205,15 +215,17 @@ class User extends MY_Controller
                         }else{
                             $data['user_name'] = $user_name_tmp;
                             $data['password'] = rand(100000, 999999);
-                            if($this->user_model->create($data)){
+                            $id = $this->user_model->create($data);
+                            if($id){
                                 echo json_encode(array(
-                                    'sucssec'=>true,
+                                    'success'=>true,
                                     'action'=>'Tao thanh cong user',
                                 ));
+                                $this->session->set_userdata($data);
                                 exit;
                             }else{
                                 echo json_encode(array(
-                                    'sucssec'=>FALSE,
+                                    'success'=>FALSE,
                                     'action'=>'Khong tao duoc ',
                                 ));
                                 exit;

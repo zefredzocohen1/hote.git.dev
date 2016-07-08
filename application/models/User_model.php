@@ -95,5 +95,11 @@ class User_model extends MY_Model
         $query = $this->db->get_where('permissions_actions', array('user_id' => $user_id, 'module_id' => $module_id, 'action_id' => $action_id), 1);
         return $query->num_rows() == 1;
     }
+//    function get_role($user_id){
+//        $this->db->from('user');
+//        $this->db->join('role','role.id=user.role_id');
+//        $this->db->where('user_id',$user_id);
+//        return $this->db->get_row();
+//    }
     
 }

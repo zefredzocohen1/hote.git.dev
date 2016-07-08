@@ -174,16 +174,7 @@
 							</div>
 						</div>
 						<div class="dates-guests hidden-xs">
-                                                    <div class="prices">
-                                                                <span class="tag discount-lmd">
-                                                          Khuyến mãi: Giảm 15%!
-                                                        </span>
-                                                      <p class="currency">VND
-                                                        <del>9.799.743</del>
-                                                      </p>
-                                                      <p class="price"><span class="nightly-price">8.341.176</span></p>
-                                                      <p class="per-night">Giá Trung bình theo đêm</p>
-                                                            </div>
+                                                    <div class="prices"></div>
                                                     <?php $query = "";
                                                         if(isset($ch_in))$query.='&ch_in='.$ch_in;
                                                         if(isset($ch_out))$query.='&ch_out='.$ch_out;
@@ -231,7 +222,8 @@
                                                                         <button  class="btn btn-success tclick" data-toggle="modal" data-target="#myModal">
 										<span class="glyphicon glyphicon-time"></span> Đặt phòng
 									</button>
-                                                                        <?php if(!$this->session->userdata('user_id')){ ?>
+                                                                        <?php if(!$this->session->userdata('user_id')){ echo $this->session->userdata('user_id');
+  pre($this->session->all_userdata());?>
                                                                             <div class="modal fade" id="myModal" role="dialog">
                                                                                 <div class="modal-dialog">
 
@@ -291,6 +283,12 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+            $('.book-action .tclick').click(function(){
+                <?php if(!$this->session->userdata('user_id')){?>
+                    $('#myModal').modal('show');
+                    return false;
+                <?php }?>
+            });
             $('#name_customer').keydown(function(){$('.error_submit').html('');});
             $('#phone_number').keydown(function(){$('.error_submit').html('');});
             $('#email').keydown(function(){$('.error_submit').html('');});
@@ -314,9 +312,8 @@
                           dataType: 'json',
                           data: {checkin:$('#bookin-dpk').val(),checkout:$('#bookout-dpk').val(),guests:$('#guests').val()},
                           success: function (data) {
-                              console.log(data.prices);
                               if(typeof  data.error!= undefined){$('.fees').html(data.error);}
-                              if(typeof  data.prices!= undefined){ $('.fees').html(data.prices);}
+                              if(typeof  data.prices!= undefined){ $('.prices').html(data.prices);}
                             }
                         })
                     }
@@ -338,11 +335,8 @@
                           dataType: 'json',
                           data: {checkin:$('#bookin-dpk').val(),checkout:$('#bookout-dpk').val(),guests:$('#guests').val()},
                           success: function (data) {
-                              console.log(data.prices);
-//                              if(typeof  data.error!= undefined)$('.fees').html(data.error);
-//                              else $('.fees').html(data.prices);
                                 if(typeof  data.error!= undefined){$('.fees').html(data.error);}
-                              if(typeof  data.prices!= undefined){ $('.fees').html(data.prices);}
+                                if(typeof  data.prices!= undefined){ $('.prices').html(data.prices);}
                             }
                         })
                     }
@@ -394,8 +388,15 @@
                         url  : "<?php echo base_url().'user/createFast'?>",
                         data : data,
                         success :  function(data){
+                            if(typeof data.error != undefined){
+                                alert(data.error);
+                                console.log(data);
+                                return;
+                            }
+                            if(typeof data.success !=undefined){
+                                location.reload();
+                            }
                             window.location.href = '<?php echo $urlCurrent;?>';
-//                            window.location.href = ''+urlCurl;
                         },
                         dataType:'JSON',
                     })

@@ -109,6 +109,7 @@ class payments extends MY_Controller
         $data['user'] = $this->user_model->get_row($input);
         $config = get_config_email($this->config->item('address_email'),$this->config->item('pass_email'));
         echo $this->email->print_debugger();
+//        $email_contact$this->email->get_row()
         echo $this->sendEmail($this, $data['user']->email, 'Email thông báo đặt phòng', 'email đặt phòng thành công từ người quản trị đến người đặt phòng',$config);
         echo $this->sendEmail($this, $this->config->item('address_email'), 'Email thông báo đặt phòng', 'email đặt phòng thành công từ hệ thống đến người quản trị ',$config);
         echo $this->sendEmail($this, $data['doitac']->email, 'Email thông báo đặt phòng', 'email đặt phòng thành công từ hệ thống đến Đối tác ',$config);
