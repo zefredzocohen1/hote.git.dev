@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2016 at 03:41 PM
+-- Generation Time: Jul 08, 2016 at 12:51 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -104,7 +104,7 @@ CREATE TABLE `tbl_app_config` (
 
 INSERT INTO `tbl_app_config` (`key`, `value`) VALUES
 ('address_email', 'lehai04.1991@gmail.com'),
-('language', 'english'),
+('language1', 'english'),
 ('nameCompany', 'Start View'),
 ('name_website', 'Start View Resort'),
 ('pass_email', 'pymzrhbdgpfkuwac');
@@ -163,16 +163,58 @@ CREATE TABLE `tbl_district` (
 
 CREATE TABLE `tbl_email` (
   `email_id` int(11) NOT NULL,
-  `email_name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL
+  `email_title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `email_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_email`
 --
 
-INSERT INTO `tbl_email` (`email_id`, `email_name`, `description`) VALUES
-(1, 'Email thông báo đặt phòng', '<p><img alt="" src="/uploads/userfiles/images/1/1.png" style="height:302px; width:484px" /></p>\r\n\r\n<p>Bạn đ&atilde; đặt ph&ograve;ng th&agrave;nh c&ocirc;ng</p>');
+INSERT INTO `tbl_email` (`email_id`, `email_title`, `description`, `email_type`) VALUES
+(3, 'Thông báo đặt phòng gửi đến người quản trị', '<p>Ch&agrave;o __user_name__,</p>\r\n\r\n<p>Hiện nay hệ thống đ&atilde; ghi nhận gần đ&acirc;y __customer_name__ đ&atilde; đặt ph&ograve;ng th&agrave;nh c&ocirc;ng từ trang web</p>\r\n\r\n<p>Th&ocirc;ng tin ph&ograve;ng được đặt</p>\r\n\r\n<ul>\r\n	<li>__room_image__: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; __room_name__</li>\r\n	<li>đặt ph&ograve;ng từ ng&agrave;y: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;__check_in__</li>\r\n	<li>đặt ph&ograve;ng đến ng&agrave;y: &nbsp; &nbsp; &nbsp; &nbsp;__check_out__</li>\r\n	<li>gi&aacute; VNĐ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; __prices__</li>\r\n	<li>SĐT: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; __phone_number__</li>\r\n</ul>', 1),
+(4, 'Thông báo đặt phòng gửi đến đối tác', '<p>Ch&agrave;o __user_name__,</p>\r\n\r\n<p>Hiện nay hệ thống đ&atilde; ghi nhận gần đ&acirc;y __customer_name__ đ&atilde; đặt ph&ograve;ng th&agrave;nh c&ocirc;ng từ trang web</p>\r\n\r\n<p>Th&ocirc;ng tin ph&ograve;ng được đặt</p>\r\n\r\n<ul>\r\n	<li>__room_image__: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; __room_name__</li>\r\n	<li>đặt ph&ograve;ng từ ng&agrave;y: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;__check_in__</li>\r\n	<li>đặt ph&ograve;ng đến ng&agrave;y: &nbsp; &nbsp; &nbsp; &nbsp;__check_out__</li>\r\n	<li>gi&aacute; VNĐ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; __prices__</li>\r\n	<li>SĐT: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: &nbsp; __phone_number__</li>\r\n</ul>', 2),
+(5, 'Thông báo đặt phòng thành công', 'Chào __user_name__,\r\n\r\nHiện nay hệ thống đã ghi nhận gần đây __customer_name__ đã đặt phòng thành công từ trang web\r\n\r\nThông tin phòng được đặt\r\n\r\n__room_image__:             __room_name__\r\nđặt phòng từ ngày:          __check_in__\r\nđặt phòng đến ngày:        __check_out__\r\ngiá VNĐ                     :   __prices__\r\nSĐT:                          :   __phone_number__', 3),
+(6, 'Thông báo Hủy phòng', 'Chào __user_name__,\r\n\r\nHiện nay hệ thống đã ghi nhận gần đây __customer_name__ đã đặt phòng thành công từ trang web\r\n\r\nThông tin phòng được đặt\r\n\r\n__room_image__:             __room_name__\r\nđặt phòng từ ngày:          __check_in__\r\nđặt phòng đến ngày:        __check_out__\r\ngiá VNĐ                     :   __prices__\r\nSĐT:                          :   __phone_number__\r\nTuy nhiên vì sự cố kỹ thuật, người quản trị đã hủy đơn đặt phòng của bạn.Số tiền đặt phòng mà bạn đã thanh toán sẽ được trả đúng theo quy định đã ghi .', 4),
+(7, 'Thông báo Xác nhận tài khoản đối tác', '<p>Ch&agrave;o __user_name__, Hiện nay hệ thống đ&atilde; ghi nhận gần đ&acirc;y __user_name__ đ&atilde; đăng k&yacute; th&agrave;nh c&ocirc;ng đối t&aacute;c tiềm năng của startview Chỉ c&ograve;n 1 bước cuối c&ugrave;ng nữa l&agrave; việc x&aacute;c nhận t&agrave;i khoản đối t&aacute;c xin vui l&ograve;ng click v&agrave;o link b&ecirc;n dưới để x&aacute;c nhận th&ocirc;ng tin</p>\r\n\r\n<p>__link_very__</p>\r\n\r\n<p>&nbsp;</p>', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_email_history`
+--
+
+CREATE TABLE `tbl_email_history` (
+  `email_history_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `time` date NOT NULL,
+  `status` tinyint(1) NOT NULL COMMENT '1: thành công, 0 thất bại'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_email_template`
+--
+
+CREATE TABLE `tbl_email_template` (
+  `email_template_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_email_template`
+--
+
+INSERT INTO `tbl_email_template` (`email_template_id`, `name`) VALUES
+(1, 'Email thông báo đặt phòng thành công gửi đến người quản trị'),
+(2, 'Email thông báo đặt phòng gửi đến đối tác'),
+(3, 'Email thông báo đặt phòng gửi đến người đăng ký'),
+(4, 'Email hủy đặt phòng'),
+(5, 'Email xác nhận quyền đặt phòng');
 
 -- --------------------------------------------------------
 
@@ -329,11 +371,18 @@ CREATE TABLE `tbl_order` (
   `order_id` int(11) NOT NULL,
   `post_room_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `payment_type` int(11) NOT NULL,
-  `checkin` int(11) NOT NULL,
-  `checkout` int(11) NOT NULL,
-  `number_customer` int(11) NOT NULL
+  `payment_type` varchar(255) NOT NULL,
+  `checkin` date NOT NULL,
+  `checkout` date NOT NULL,
+  `guests` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`order_id`, `post_room_id`, `user_id`, `payment_type`, `checkin`, `checkout`, `guests`) VALUES
+(1, 1, 14, '7000000', '2016-07-08', '2016-07-10', 10);
 
 -- --------------------------------------------------------
 
@@ -358,6 +407,7 @@ INSERT INTO `tbl_permissions` (`module_id`, `user_id`) VALUES
 ('Home', 2),
 ('House_type', 2),
 ('Orders', 2),
+('Order_room', 2),
 ('payments', 2),
 ('Post_room', 2),
 ('Room_type', 2);
@@ -649,13 +699,9 @@ INSERT INTO `tbl_user` (`user_id`, `last_name`, `first_name`, `user_name`, `emai
 (4, 'Nguyễn Huy', 'C', 'doitac1', 'bim_v0tinh@yahoo.com.vn', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Khu du lịch Đồ Sơn Cát Bà', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-05-26 14:30:25', '2016-05-31 09:13:40', 1, 2),
 (7, 'Hoàng Thị', 'Dương', 'doitac4', 'doitac4@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'Khu du lịch đảo cô tô', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-05-28 10:19:59', NULL, 1, 2),
 (8, 'Nguyễn Văn', 'F', 'admin1', 'admin1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-05-31 13:54:41', NULL, 1, 1),
-(10, 'a', 'a', 'a', NULL, '1b8e2262663b6efb5c5a6d21e2122593', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
-(11, '1', '1', '1', NULL, 'c4ca4238a0b923820dcc509a6f75849b', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
-(12, '1', '1', '1', 'lehai04.1991@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
-(13, 'hai', 'le', 'lehia', 'zefredzocohen@gmail.com', '25d55ad283aa400af464c76d713c07ad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
 (14, 'hai', 'le', 'lehai', 'zefredzocohen@gmail.com', '25d55ad283aa400af464c76d713c07ad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
-(15, '1', '1', '1', 'lehai04.1991@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
-(16, '1', '1', '1', 'lehai04.1991@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3);
+(67, '11111111111', '1', '1111111111143207', '11111111111111', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3),
+(68, 'hải le', '1', 'hai_le30826', 'lehai_1991@yahoo.com', '346368', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 3);
 
 --
 -- Indexes for dumped tables
@@ -695,7 +741,20 @@ ALTER TABLE `tbl_district`
 -- Indexes for table `tbl_email`
 --
 ALTER TABLE `tbl_email`
-  ADD PRIMARY KEY (`email_id`);
+  ADD PRIMARY KEY (`email_id`),
+  ADD KEY `fk_email_email_email_template` (`email_type`);
+
+--
+-- Indexes for table `tbl_email_history`
+--
+ALTER TABLE `tbl_email_history`
+  ADD PRIMARY KEY (`email_history_id`);
+
+--
+-- Indexes for table `tbl_email_template`
+--
+ALTER TABLE `tbl_email_template`
+  ADD PRIMARY KEY (`email_template_id`);
 
 --
 -- Indexes for table `tbl_experience`
@@ -825,7 +884,17 @@ ALTER TABLE `tbl_district`
 -- AUTO_INCREMENT for table `tbl_email`
 --
 ALTER TABLE `tbl_email`
-  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tbl_email_history`
+--
+ALTER TABLE `tbl_email_history`
+  MODIFY `email_history_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tbl_email_template`
+--
+ALTER TABLE `tbl_email_template`
+  MODIFY `email_template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_experience`
 --
@@ -845,7 +914,7 @@ ALTER TABLE `tbl_icon`
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_post_room`
 --
@@ -875,10 +944,16 @@ ALTER TABLE `tbl_sidebar`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_email`
+--
+ALTER TABLE `tbl_email`
+  ADD CONSTRAINT `fk_email_email_email_template` FOREIGN KEY (`email_type`) REFERENCES `tbl_email_template` (`email_template_id`);
 
 --
 -- Constraints for table `tbl_modules_actions`
