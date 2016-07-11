@@ -12,7 +12,6 @@ function load_config(){
         $CI->lang->switch_to($CI->config->item('language'));
     }
     $CI->load->helper('lang');
-    $CI->session->set_userdata('language','english');
     $language_tmp = getDefaultLanguage();
     $language = $CI->session->userdata('language');
     if($language ==NULL){

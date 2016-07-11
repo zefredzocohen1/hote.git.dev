@@ -50,8 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 //$route['(.*)'] = 'site/default_home';
+$route['404_override'] = 'errors/pageNotFound';
 $route['default_controller'] = 'site/home';
-$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = "admin/login";
 //site
@@ -61,7 +61,8 @@ $route['room/(:any)/(:any)'] = 'site/room/$1/$2';
 $route['home/(:any)'] = 'site/home/$1';
 $route['home'] = 'site/home';
 $route['user/(:any)'] = 'site/user/$1';
-$route['payments/(:any)/(:any)'] = 'site/payments/$1/(:any)';
+$route['payments/(:any)/(:any)'] = 'site/payments/$1/$2';
 $route['payments'] = 'site/payments';
 $route['spaces/prices/(:any)'] = 'site/spaces/prices/$1';
+$route['language'] = 'site/language';
 //$route['site'] = "site/home";

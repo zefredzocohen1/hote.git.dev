@@ -16,7 +16,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <?php if(isset($_SESSION['user_name'])&&$_SESSION['role_id']==3){?>
                 <li><a href="<?php echo base_url()?>">Xin chào <?php echo $_SESSION['user_name']?></a></li>
-                <li><a href="<?php echo base_url().SiteDefault?>postnews1">Đăng tin cho thuê</a></li>
             <?php }else{?>
                 <li><a href="<?php echo base_url();?>home/register">Đăng kí</a></li>
                     <li><a href="<?php echo base_url();?>home/login">Đăng nhập</a></li>

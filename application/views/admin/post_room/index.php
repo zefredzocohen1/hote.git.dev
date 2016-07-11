@@ -96,7 +96,7 @@
                     <tr class='row_20'>
                         <td class="textC"><?php echo $i;?></td>
                         <td class="textC img_room" >
-                        	<a href="<?php echo base_url('room/room_detail/'.$row->post_room_id);?>" target = "_blank">
+                        	<a href="<?php echo base_url('admin/post_room/edit/'.$row->post_room_id);?>" target = "_blank">
                         		<?php
                         			$img = json_decode($row->image_list);
                         		?>

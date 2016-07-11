@@ -13,4 +13,10 @@ class Email_model extends MY_Model
     function getEmailTemplate(){
         return $this->db->get('email_template');
     }
+    function getEmailBook($arrayID = array()){
+        foreach ($arrayID as $key => $value){
+            $this->db->or_where('email_type',$value);
+        }
+        return $this->db->get($this->table);
+    }
 }

@@ -96,8 +96,7 @@ $(document).ready(function(){
                     $('.info-book').html('nhập số khách');
                     return;
                 }
-                alert(11111111111);
-                window.location.href = url+'room/order_room/0o6qe97zpr?checkin='+checkin.val()+"&checkout="+checkout.val()+"&guests="+guest.val();
+                window.location.href = url+'room/order_room/'+id+'?checkin='+checkin.val()+"&checkout="+checkout.val()+"&guests="+guest.val();
             }else{
             var amenities = '';
             var experiences = '';
@@ -137,6 +136,21 @@ $(document).ready(function(){
     })}
         })
     });
+    $(function(){
+            $('#language li').click(function(){
+                var language = $(this).find('a');
+                var data = {language:language.data('value')};
+            $('#language').find('.icon-language span').html(language.html());
+            $.ajax({
+                url:url+'language',
+                    dataType: 'json',
+                    success: function (data) {
+                    },
+                    data: data,
+                    type: 'POST'
+            });
+        });
+        }); 
 })
 
 //----------------------------------------------------Index--------------------------------------------

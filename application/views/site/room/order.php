@@ -1,4 +1,6 @@
-
+<script type="text/javascript">
+var id = '<?php echo $id_encode;?>';
+</script>
 <div id="view" style="margin-left: 15px;margin-top: 85px;">
     <form accept-charset="UTF-8" action="<?php echo base_url();?>payments/book/<?php echo $id_encode.'?checkin='.$checkin->format('d-m-Y').'&checkout='.$checkout->format('d-m-Y').'&guests='.$guests;?>" data-action-book="/payments/book/<?php echo $id_encode;?>" data-action-contact="/users/update/7aea1cf9188e998f86c9d921fc0e8f21" data-action-finalize="/payments/finalize/1BPHJ-B6BB-VRMV" id="payment-form" method="post" name="book" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="7WoaKA9ACSC1KEJYL4+vfP+euhiO0gES5PeSi6PIbH4=" type="hidden"></div>
   <input name="oid" value="1BPHJ-B6BB-VRMV" type="hidden">

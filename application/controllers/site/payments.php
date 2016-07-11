@@ -8,8 +8,10 @@ class payments extends MY_Controller
         parent::__construct();
         $this->load->model('mail_template_model');
         $this->load->model('mail_history_model');
+        $this->load->model('email_model');
         $this->load->library('email');
          $this->load->model('order_room_model');
+         $this->load->model('post_room_model');
 //         $this->load->model('mail_history_model');
     }
 
@@ -19,20 +21,21 @@ class payments extends MY_Controller
     }
     function book($id=''){
         //check điều kiện
+        pre($this->session->userdata);return;
         $user_id = $this->session->userdata('user_id');
         if(!isset($user_id)||$user_id==''){
             redirect(base_url());
         }
-        if($id=''){
+        if($id==''){
             redirect(base_url());
         }
-        $id_decode = $this->config->item('encode_id')->decode($id);;
+        $id_decode = $this->config->item('encode_id')->decode($id);
+        
         if(count($id_decode)<=0){
             redirect(base_url());
         }else{
             $id_encode = $id;
         }
-        
         $checkin = $this->input->get('checkin')?$this->input->get('checkin'):'';
         $checkout = $this->input->get('checkout')?$this->input->get('checkout'):'';
         $guests = $this->input->get('guests')?$this->input->get('guests'):'';
@@ -66,6 +69,11 @@ class payments extends MY_Controller
         if($data['checkin']<  $dateNow||$data['checkout']<$dateNow){
             redirect(base_url().'room/room_detail/'.$data['id_encode']);
         }
+        //check room in database
+        if($this->order_room_model->check_exists_room($id_decode[0], $data['checkin'], $data['checkout'])){
+            // đã tồn tại phòng
+            return;
+        }
         $prices = $this->post_room_model->get_row($input);
         $data['name_room'] = $prices->post_room_name;
         //giá 1 đêm
@@ -93,11 +101,11 @@ class payments extends MY_Controller
              'post_room_id'=>$id_decode[0],
              'user_id'=>$user_id,
              'payment_type'=>$data['price_all_night_add_fee'],
-             'checkin'=>$data['checkin'],
-             'checkout'=>$data['checkout'],
+             'checkin'=>$data['checkin']->format('Y-m-d'),
+             'checkout'=>$data['checkout']->format('Y-m-d'),
              'guests'=>$data['guests'],
          );
-         $this->order_room_model->create($data_insert);
+//        $this->order_room_model->create($data_insert);
         //gửi email
         $input = array();
         $input = array(
@@ -107,9 +115,12 @@ class payments extends MY_Controller
             );
         $data['doitac'] = $this->user_model->get_row(array('where'=>array('user_id'=>$prices->user_id)));
         $data['user'] = $this->user_model->get_row($input);
+        
         $config = get_config_email($this->config->item('address_email'),$this->config->item('pass_email'));
         echo $this->email->print_debugger();
-//        $email_contact$this->email->get_row()
+        $email_contact = $this->email_model->get_list(array('1','2','3'));
+        pre($email_contact);
+        return;
         echo $this->sendEmail($this, $data['user']->email, 'Email thông báo đặt phòng', 'email đặt phòng thành công từ người quản trị đến người đặt phòng',$config);
         echo $this->sendEmail($this, $this->config->item('address_email'), 'Email thông báo đặt phòng', 'email đặt phòng thành công từ hệ thống đến người quản trị ',$config);
         echo $this->sendEmail($this, $data['doitac']->email, 'Email thông báo đặt phòng', 'email đặt phòng thành công từ hệ thống đến Đối tác ',$config);

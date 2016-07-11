@@ -21,10 +21,10 @@ class MY_Model extends CI_Model {
      */
     function create($data = array())
     {
-        $id = $this->db->insert_id($this->table, $data);
-        if($id>0)
+//        $id = $this->db->insert($this->table, $data);
+        if($this->db->insert($this->table, $data))
         {
-            return $id;
+            return true;
         }else{
             return FALSE;
         }

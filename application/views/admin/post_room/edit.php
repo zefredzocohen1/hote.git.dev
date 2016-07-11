@@ -64,11 +64,11 @@
 							<div class="formRight">
 								<span class="oneTwo">
 
-                                                                    <input type="text" name="address_detail" id="autocomplete" value="<?php echo (isset($post_info))?$post_info['address']['address_detail']:isset($address)?$address->address_detail:set_value('address_detail');?>" _autocheck="true"  placeholder="Nhập địa chỉ ... " />
+									<input type="text" name="address_detail" id="autocomplete" value="<?php echo (isset($post_info))?$post_info['address']['address_detail']:set_value('address_detail');?>" _autocheck="true"  placeholder="Nhập địa chỉ ... " />
 
-									<input name="lat" id="lat" value="<?php echo (isset($post_info))?$post_info['address']['lat']:isset($address)?$address->lat:set_value('lat');?>" type="hidden" />
+									<input name="lat" id="lat" value="<?php echo (isset($post_info))?$post_info['address']['lat']:set_value('lat');?>" type="hidden" />
 
-									<input name="lng" id="lng" value="<?php echo (isset($post_info))?$post_info['address']['lng']:isset($address)?$address->lng:set_value('lng');?>" type="hidden" />
+									<input name="lng" id="lng" value="<?php echo (isset($post_info))?$post_info['address']['lng']:set_value('lng');?>" type="hidden" />
 								</span>
 								<span name="name_autocheck" class="autocheck"></span>
 								<div name="name_error" class="clear error"></div>
@@ -84,21 +84,21 @@
 								<div class="formRow clearfix address-first">
 								    <label for="address_street" class="col-sm-4 control-label">Địa chỉ 1:</label>
 								    <div class="col-sm-8">
-								      	<textarea placeholder="Tên đường" id="address_1" class="required"  name="address_street"><?php echo (isset($post_info))?$post_info['address']['address_street']:isset($address)?$address->address_street:set_value('address_street'); ?></textarea>
+								      	<textarea placeholder="Tên đường" id="address_1" class="required"  name="address_street"><?php echo (isset($post_info))?$post_info['address']['address_street']:set_value('address_street'); ?></textarea>
 								      	<div name="image_error" class="clear error"><?php echo form_error('address_street');?></div>
 								    </div>
 								</div>
 								<div class="formRow clearfix">
 								    <label for="address_2" class="col-sm-4 control-label">Địa chỉ 2:</label>
 								    <div class="col-sm-8">
-								      	<textarea placeholder="Khu du lịch, Căn hộ, tòa nhà, tầng, vv" name="address_2" id="address_2"><?php echo (isset($post_info))?$post_info['address']['address_2']:isset($address)?$address->address_2:set_value('address_2'); ?></textarea>
+								      	<textarea placeholder="Khu du lịch, Căn hộ, tòa nhà, tầng, vv" name="address_2" id="address_2"><?php echo (isset($post_info))?$post_info['address']['address_2']:set_value('address_2'); ?></textarea>
 								    </div>
 								</div>
 								<div class="formRow clearfix">
 								    <label for="district" class="col-sm-4 control-label">Quận/Huyện:</label>
 								    <div class="col-sm-8">
 
-								      	<input type="text" name="district" class="required" placeholder="Quận/huyện" id="administrative_area_level_2" readonly="true" value="<?php echo (isset($post_info))?$post_info['address']['district']:isset($address)?$address->district:set_value('district'); ?>">
+								      	<input type="text" name="district" class="required" placeholder="Quận/huyện" id="administrative_area_level_2" readonly="true" value="<?php echo (isset($post_info))?$post_info['address']['district']:set_value('district'); ?>">
 
 								      	<div name="image_error" class="clear error"><?php echo form_error('district');?></div>
 								    </div>
@@ -106,7 +106,7 @@
 								<div class="formRow clearfix">
 								    <label for="provincial" class="col-sm-4 control-label">Tỉnh/Thành phố:</label>
 								    <div class="col-sm-8">
-								      	<input type="text" class="required" placeholder="Tỉnh/Thành phố" name="provincial" id = "administrative_area_level_1" readonly="true" value="<?php echo (isset($post_info))?$post_info['address']['provincial']:isset($address)?$address->provincial:set_value('provincial'); ?>">
+								      	<input type="text" class="required" placeholder="Tỉnh/Thành phố" name="provincial" id = "administrative_area_level_1" readonly="true" value="<?php echo (isset($post_info))?$post_info['address']['provincial']:set_value('provincial'); ?>">
 								      	<div name="image_error" class="clear error"><?php echo form_error('provincial');?></div>
 								    </div>
 								</div>
@@ -114,7 +114,7 @@
 								    <label for="zip_code"  class="col-sm-4 control-label">ZIP/ Mã bưu điện</label>
 								    <div class="col-sm-8">
 
-								      	<input type="text" class="required number" placeholder="ZIP/ Mã bưu điện" name="zip_code" id="postal_code" value="<?php echo (isset($post_info))?$post_info['address']['zip_code']:isset($address)?$address->zip_code:set_value('zip_code'); ?>">
+								      	<input type="text" class="required number" placeholder="ZIP/ Mã bưu điện" name="zip_code" id="postal_code" value="<?php echo (isset($post_info))?$post_info['address']['zip_code']:set_value('zip_code'); ?>">
 
 								      	<div name="image_error" class="clear error"><?php echo form_error('zip_code');?></div>
 								    </div>
@@ -123,7 +123,7 @@
 								    <label for="country" class="col-sm-4 control-label">Quốc gia:</label>
 								    <div class="col-sm-8">
 
-								      	<input type="text" class="required" readonly="true" name="country" id="country" value="<?php echo (isset($post_info))?$post_info['address']['country']:isset($address)?$address->country:set_value('country'); ?>">
+								      	<input type="text" class="required" readonly="true" name="country" id="country" value="<?php echo (isset($post_info))?$post_info['address']['country']:set_value('country'); ?>">
 
 								      	<div name="image_error" class="clear error"><?php echo form_error('country');?></div>
 								    </div>
@@ -148,7 +148,7 @@
 									<label class="formLeft">Mô tả:<span class="req">*</span></label>
 									<div class="formRight">
 										<div class="left">
-											<textarea rows="5" name="description" class="required" minlength="300" maxlength="1000" ><?php echo (isset($post_info))? $post_info['description'] : isset($address)?$address->address_detail:set_value('description');?></textarea>
+											<textarea rows="5" name="description" class="required" minlength="300" maxlength="1000" ><?php echo (isset($post_info))? $post_info['description'] : set_value('description');?></textarea>
 										</div>
 										<div name="image_error" class="clear error"></div>
 									</div>
@@ -316,7 +316,7 @@
 									<label class="formLeft">Diện tích:</label>
 									<div class="formRight">
 										<div class="left">
-											<input type="text" name="acreage" class="mw160 number" value="<?php echo (isset($post_info))?$post_info['acreage']:isset($address)?$address->address_detail:set_value('acreage');?>"> <strong>m<sup>2</sup></strong>
+											<input type="text" name="acreage" class="mw160 number" value="<?php echo (isset($post_info))?$post_info['acreage']:set_value('acreage');?>"> <strong>m<sup>2</sup></strong>
 										</div>
 										<div for="acreage" generated="true" class="error"></div>
 										<div name="image_error" class="clear error"></div>

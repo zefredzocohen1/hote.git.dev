@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>public/site/css/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>public/site/css/fill-price-jquery.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>public/site/css/style3.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>public/site/css/datepicker.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>public/site/css/bootstrap-datepicker3.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>public/site/css/style-pannel.css">
 <link rel="stylesheet" type="text/css" href="<?php base_url();?>public/site/css/book.css" media="all" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="<?php base_url();?>public/site/css/widget_embed_191.css" media="all" rel="stylesheet" type="text/css" />
@@ -32,6 +32,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>public/site/js/fotorama.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>public/site/js/starview.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>public/site/js/jquery-ui.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>public/site/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>public/site/js/bootstrap-datepicker.min.js"></script>
 <!--<script type="text/javascript" src="<?php echo base_url();?>public/site/js/jquery.query-object.js"></script>-->
 <!--<script type="text/javascript" src="<?php //echo base_url();?>public/site/js/web.js"></script>-->

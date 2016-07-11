@@ -11,25 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/hooks/load_config.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/core/MY_Model.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/controllers/site/payments.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/controllers/site/room.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/controllers/admin/emails.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/views/admin/emails/post.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/views/site/home/block_search.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/config/routes.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/views/site/room/list_room.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/models/Post_room_model.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/config/autoload.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/views/site/room/room_detail.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/controllers/site/spaces.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/views/site/layout.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/public/site/js/starview.js</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/controllers/example.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/views/site/head.php</file>
-            <file>file:/C:/xampp/htdocs/git/hotel.git-dev.new/application/controllers/admin/Login.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

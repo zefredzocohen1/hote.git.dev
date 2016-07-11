@@ -1,3 +1,6 @@
+<script type="text/javascript"> 
+var id='<?php echo $id_encode;?>';
+</script>
 <section id="breadcrum-wrap">
 	<div class="container">
 		<div class="row">
@@ -179,8 +182,6 @@
                                                         if(isset($ch_in))$query.='&ch_in='.$ch_in;
                                                         if(isset($ch_out))$query.='&ch_out='.$ch_out;
                                                         if(isset($guest))$query.='&guest='.$guest;
-                                                        if(isset($_SESSION['room_id']))$room_id = $_SESSION['room_id'];
-                                                        else $room_id = 1;
                                                     
                                                     ?>
                                                     <div class="dates-guests">
@@ -213,7 +214,7 @@
                                                         <div class="fees">
                                                             
                                                         </div>
-                                                        <div class="alert alert-warning info-book"></div>
+                                                        <div class="alert alert-warning info-book"><?php pre( $this->session->userdata);?></div>
                                                     </div>
                                                     <div class="book-action">
 <!--									<button type="submit" class="btn btn-success">
@@ -222,8 +223,7 @@
                                                                         <button  class="btn btn-success tclick" data-toggle="modal" data-target="#myModal">
 										<span class="glyphicon glyphicon-time"></span> Đặt phòng
 									</button>
-                                                                        <?php if(!$this->session->userdata('user_id')){ echo $this->session->userdata('user_id');
-  pre($this->session->all_userdata());?>
+                                                                        <?php if(!$this->session->userdata('user_id')){?>
                                                                             <div class="modal fade" id="myModal" role="dialog">
                                                                                 <div class="modal-dialog">
 
@@ -294,17 +294,23 @@
             $('#email').keydown(function(){$('.error_submit').html('');});
 		var nowTemp = new Date();
 		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-		 
-		var checkin = $('#bookin-dpk').datepicker({
-		  onRender: function(date) {
-		    return date.valueOf() < now.valueOf() ? 'disabled' : '';
-		  },
-		   format: 'dd/mm/yyyy'
-		}).on('changeDate', function(ev) {
-		  if (ev.date.valueOf() > checkout.date.valueOf()) {
-		    var newDate = new Date(ev.date)
-		    newDate.setDate(newDate.getDate() + 1);
-		    checkout.setValue(newDate);
+		var checkin = $('#bookin-dpk');
+                var checkout = $('#bookout-dpk')
+		checkin.datepicker({
+                    onRender: function(date) {
+                        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                    },
+                        format: 'dd/mm/yyyy',
+                        startDate:now
+                  }).on('changeDate', function(ev) {
+                    var newDate;
+                    if (ev.date.valueOf() > checkout.val()) {
+                        newDate  = new Date(ev.date)
+                        newDate.setDate(newDate.getDate() );
+                    }
+                    checkout.datepicker('setStartDate',newDate);
+                    checkin.datepicker('hide');
+                    checkout[0].focus();
                     if(checkout.valueOf()!=''){
                         $.ajax({
                           url:'<?php echo base_url().'spaces/prices/'.$id_encode?>',
@@ -312,23 +318,24 @@
                           dataType: 'json',
                           data: {checkin:$('#bookin-dpk').val(),checkout:$('#bookout-dpk').val(),guests:$('#guests').val()},
                           success: function (data) {
-                              if(typeof  data.error!= undefined){$('.fees').html(data.error);}
-                              if(typeof  data.prices!= undefined){ $('.prices').html(data.prices);}
+                                  if(typeof  data.error!= undefined){$('.fees').html(data.error);}
+                                  if(typeof  data.prices!= undefined){ $('.prices').html(data.prices);}
                             }
                         })
-                    }
-		  }
-		  checkin.hide();
-		  $('#bookout-dpk')[0].focus();
-		}).data('datepicker');
-		var checkout = $('#bookout-dpk').datepicker({
-		  onRender: function(date) {
-		    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-		  },
-		  format: 'dd/mm/yyyy'
-		}).on('changeDate', function(ev) {
-		  checkout.hide();
-                  if(checkin.valueOf()!=''){
+                     }
+
+                }).data('datepicker');
+                checkout.datepicker({
+                onRender: function(date) {
+                    return date.valueOf() <= checkin.val() ? 'disabled' : '';
+                },
+                format: 'dd/mm/yyyy',
+                startDate:now
+                }).on('changeDate', function(ev) {
+                    checkout.datepicker('hide');
+                    var newDate = new Date(ev.date)
+                    newDate.setDate(newDate.getDate() );
+                    if(checkin.valueOf()!=''){
                         $.ajax({
                           url:'<?php echo base_url().'spaces/prices/'.$id_encode?>',
                           type: 'POST',
@@ -340,7 +347,24 @@
                             }
                         })
                     }
-		}).data('datepicker');
+                }).data('datepicker');
+                $('#guests').on('change',function(){
+                var checkin     = $('#bookin-dpk');
+                var checkout    = $('#bookout-dpk');
+                    if(typeof checkin != undefined && checkin.val().trim() != '' && typeof checkout != undefined && checkout.val().trim() != ''){
+                        $.ajax({
+                          url:'<?php echo base_url().'spaces/prices/'.$id_encode?>',
+                          type: 'POST',
+                          dataType: 'json',
+                          data: {checkin:$('#bookin-dpk').val(),checkout:$('#bookout-dpk').val(),guests:$('#guests').val()},
+                          success: function (data) {
+                                if(typeof  data.error!= undefined){$('.fees').html(data.error);}
+                                if(typeof  data.prices!= undefined){ $('.prices').html(data.prices);}
+                            }
+                        })
+                    }
+                        
+                })
                 $('#frm-book').on('submit', function(ev) {
                     var checkin = $('#bookin-dpk');
                     var checkout = $('#bookout-dpk');
